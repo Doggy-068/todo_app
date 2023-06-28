@@ -6,6 +6,21 @@ class Storage {
     return await SharedPreferences.getInstance();
   }
 
+  static const String _localeKey = 'LOCALE_KEY';
+
+  static Future<bool> setLocale(Locale locale) async {
+    return await (await _getInstance())
+        .setString(_localeKey, locale.languageCode);
+  }
+
+  static Future<Locale> getLocale() async {
+    String? value = (await _getInstance()).getString(_localeKey);
+    if (value == null) {
+      return const Locale('en');
+    }
+    return Locale(value);
+  }
+
   static const String _themeColorKey = 'THEME_COLOR_KEY';
 
   static Future<bool> setThemeColor(Color themeColor) async {

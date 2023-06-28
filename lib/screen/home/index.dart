@@ -7,6 +7,7 @@ import 'package:todo_app/screen/detail/index.dart';
 import 'package:todo_app/screen/edit/index.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/database/index.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ScreenHome extends StatelessWidget {
   const ScreenHome({super.key});
@@ -80,7 +81,7 @@ class TodoItemCard extends StatelessWidget {
       },
       child: Badge(
         isLabelVisible: _todo.isOutDate,
-        label: const Text('Outdate!'),
+        label: Text(AppLocalizations.of(context)!.home_outdated),
         offset: const Offset(-55, 15),
         child: Card(
           color: _todo.isOutDate ? Colors.grey[200] : null,

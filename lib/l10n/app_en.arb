@@ -1,0 +1,22 @@
+{
+  "component_com_bottom_navigation_bar_home": "Home",
+  "component_com_bottom_navigation_bar_setting": "Setting",
+  "home_outdated": "Outdated!",
+  "setting_setting": "Setting",
+  "setting_language": "App Language",
+  "setting_language_tooltip": "All languages",
+  "setting_theme": "Theme Color",
+  "setting_theme_tooltip": "All colors",
+  "setting_about": "About",
+  "detail_edit": "Edit",
+  "detail_tip": "Are you sure to delete it?",
+  "detail_cancel": "Cancel",
+  "detail_confirm": "Confirm",
+  "detail_delete": "Delete",
+  "edit_edit": "Edit",
+  "edit_type": "Type: ",
+  "edit_title": "Title: ",
+  "edit_content": "Content: ",
+  "edit_save": "Save",
+  "edit_cancel": "Cancel"
+}

@@ -4,6 +4,7 @@ import 'package:todo_app/model/todo.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app/database/index.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ScreenEdit extends StatefulWidget {
   const ScreenEdit({super.key, this.id});
@@ -62,7 +63,7 @@ class ScreenEditState extends State<ScreenEdit> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit'),
+        title: Text(AppLocalizations.of(context)!.edit_edit),
       ),
       body: Container(
         padding: const EdgeInsets.all(16.0),
@@ -72,7 +73,7 @@ class ScreenEditState extends State<ScreenEdit> {
               FormField(
                 builder: (FormFieldState state) => Row(
                   children: [
-                    const Text('Type: '),
+                    Text(AppLocalizations.of(context)!.edit_type),
                     PopupMenuButton(
                       initialValue: _type,
                       onSelected: (value) => _setType(value),
@@ -98,8 +99,8 @@ class ScreenEditState extends State<ScreenEdit> {
               ),
               TextFormField(
                 controller: titleController,
-                decoration: const InputDecoration(
-                  label: Text('Title: '),
+                decoration: InputDecoration(
+                  label: Text(AppLocalizations.of(context)!.edit_title),
                 ),
               ),
               FormField(
@@ -135,9 +136,9 @@ class ScreenEditState extends State<ScreenEdit> {
               Expanded(
                 child: TextFormField(
                   controller: contentController,
-                  decoration: const InputDecoration(
-                    labelText: 'Content: ',
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context)!.edit_content,
+                    border: const OutlineInputBorder(),
                     alignLabelWithHint: true,
                   ),
                   textAlignVertical: TextAlignVertical.top,
@@ -178,13 +179,13 @@ class ScreenEditState extends State<ScreenEdit> {
                               .then((value) => Navigator.of(context).pop());
                         }
                       },
-                      child: const Text('Save'),
+                      child: Text(AppLocalizations.of(context)!.edit_save),
                     ),
                     TextButton(
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: const Text('Cancel'),
+                      child: Text(AppLocalizations.of(context)!.edit_cancel),
                     ),
                   ],
                 ),

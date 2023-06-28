@@ -4,6 +4,7 @@ import 'package:todo_app/components/com_bottom_navigation_bar.dart';
 import 'package:todo_app/main.dart';
 import 'package:todo_app/storage/index.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ScreenSetting extends StatelessWidget {
   const ScreenSetting({super.key});
@@ -19,7 +20,7 @@ class ScreenSetting extends StatelessWidget {
             final data = snapshot.data!;
             return Scaffold(
               appBar: AppBar(
-                title: const Text('Setting'),
+                title: Text(AppLocalizations.of(context)!.setting_setting),
               ),
               body: Container(
                 padding: const EdgeInsets.all(16.0),
@@ -30,17 +31,24 @@ class ScreenSetting extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text('App Language'),
+                          Text(AppLocalizations.of(context)!.setting_language),
                           PopupMenuButton(
                             icon: const Icon(Icons.language),
-                            tooltip: 'Show language',
+                            tooltip: AppLocalizations.of(context)!
+                                .setting_language_tooltip,
+                            onSelected: (languageCode) {
+                              final locale = Locale(languageCode);
+                              context.read<AppState>().setLocale(locale);
+                              Storage.setLocale(locale);
+                            },
                             itemBuilder: (BuildContext content) => [
-                              {'label': 'English', 'value': 'English'},
-                              {'label': '简体中文', 'value': 'Chinese'},
+                              ('English', 'en'),
+                              ('简体中文', 'zh'),
                             ]
                                 .map(
                                   (item) => PopupMenuItem(
-                                    child: Text(item['label'] as String),
+                                    value: item.$2,
+                                    child: Text(item.$1),
                                   ),
                                 )
                                 .toList(),
@@ -53,36 +61,37 @@ class ScreenSetting extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text('Theme Color'),
+                          Text(AppLocalizations.of(context)!.setting_theme),
                           PopupMenuButton(
                             icon: const Icon(Icons.palette_outlined),
-                            tooltip: 'Show color',
+                            tooltip: AppLocalizations.of(context)!
+                                .setting_theme_tooltip,
                             onSelected: (color) {
                               context.read<AppState>().setColor(color);
                               Storage.setThemeColor(color);
                             },
                             itemBuilder: (BuildContext context) => [
-                              {'label': 'Blue', 'value': Colors.blue},
-                              {'label': 'Green', 'value': Colors.green},
-                              {'label': 'Pink', 'value': Colors.pink},
-                              {'label': 'Purple', 'value': Colors.purple},
+                              ('Blue', Colors.blue),
+                              ('Green', Colors.green),
+                              ('Pink', Colors.pink),
+                              ('Purple', Colors.purple),
                             ]
                                 .map(
                                   (item) => PopupMenuItem(
-                                    value: item['value'] as Color,
+                                    value: item.$2,
                                     child: Row(
                                       children: [
                                         Icon(
                                           Icons.palette_outlined,
-                                          color: item['value'] as Color,
+                                          color: item.$2,
                                         ),
                                         Container(
                                           margin:
                                               const EdgeInsets.only(left: 4.0),
                                           child: Text(
-                                            item['label'] as String,
+                                            item.$1,
                                             style: TextStyle(
-                                              color: item['value'] as Color,
+                                              color: item.$2,
                                             ),
                                           ),
                                         ),
@@ -108,8 +117,10 @@ class ScreenSetting extends StatelessWidget {
                             ),
                           );
                         },
-                        child: const Row(
-                          children: [Text('About')],
+                        child: Row(
+                          children: [
+                            Text(AppLocalizations.of(context)!.setting_about)
+                          ],
                         ),
                       ),
                     ),

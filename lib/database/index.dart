@@ -11,9 +11,9 @@ class Todos extends Table {
 
   DateTimeColumn get startTime => dateTime()();
 
-  TextColumn get title => text().withLength(min: 1)();
+  TextColumn get title => text()();
 
-  TextColumn get content => text().withLength(min: 1)();
+  TextColumn get content => text()();
 
   @override
   Set<Column> get primaryKey => {id};

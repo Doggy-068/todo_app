@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:todo_app/screen/edit/index.dart';
 import 'package:todo_app/database/index.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ScreenDetail extends StatelessWidget {
   static final DateFormat _dateFormat = DateFormat('yyyy-MM-dd');
@@ -97,7 +98,8 @@ class ScreenDetail extends StatelessWidget {
                             );
                           },
                           icon: const Icon(Icons.edit),
-                          label: const Text('Edit'),
+                          label:
+                              Text(AppLocalizations.of(context)!.detail_edit),
                         ),
                       ),
                       TextButton.icon(
@@ -105,15 +107,16 @@ class ScreenDetail extends StatelessWidget {
                           showDialog(
                             context: context,
                             builder: (BuildContext context) => AlertDialog(
-                              title: const Text('Are you sure to delete it?'),
+                              title: Text(
+                                  AppLocalizations.of(context)!.detail_tip),
                               actions: [
                                 TextButton(
                                   onPressed: () {
                                     Navigator.of(context).pop(false);
                                   },
-                                  child: const Text(
-                                    'Cancel',
-                                    style: TextStyle(color: Colors.grey),
+                                  child: Text(
+                                    AppLocalizations.of(context)!.detail_cancel,
+                                    style: const TextStyle(color: Colors.grey),
                                   ),
                                 ),
                                 TextButton(
@@ -129,7 +132,8 @@ class ScreenDetail extends StatelessWidget {
                                               Navigator.of(context).pop(true),
                                         );
                                   },
-                                  child: const Text('Confirm'),
+                                  child: Text(AppLocalizations.of(context)!
+                                      .detail_confirm),
                                 ),
                               ],
                             ),
@@ -140,7 +144,8 @@ class ScreenDetail extends StatelessWidget {
                           });
                         },
                         icon: const Icon(Icons.delete),
-                        label: const Text('Delete'),
+                        label:
+                            Text(AppLocalizations.of(context)!.detail_delete),
                       )
                     ],
                   )

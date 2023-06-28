@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/screen/home/index.dart';
 import 'package:todo_app/screen/setting/index.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ComBottomNavigationBar extends StatelessWidget {
   final int currentIndex;
@@ -22,14 +23,16 @@ class ComBottomNavigationBar extends StatelessWidget {
           ));
         }
       },
-      items: const [
+      items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
+          icon: const Icon(Icons.home),
+          label: AppLocalizations.of(context)!
+              .component_com_bottom_navigation_bar_home,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.settings),
-          label: 'Setting',
+          icon: const Icon(Icons.settings),
+          label: AppLocalizations.of(context)!
+              .component_com_bottom_navigation_bar_setting,
         ),
       ],
     );
