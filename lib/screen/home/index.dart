@@ -56,11 +56,17 @@ class ScreenHomeState extends State<ScreenHome> {
           children: _list
               .map((e) => GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(
+                      Navigator.of(context)
+                          .push(
                         MaterialPageRoute(
                           builder: (context) => ScreenDetail(id: e.id),
                         ),
-                      );
+                      )
+                          .then((value) {
+                        if (value == true) {
+                          fetchList();
+                        }
+                      });
                     },
                     child: TodoItemCard(todo: e),
                   ))

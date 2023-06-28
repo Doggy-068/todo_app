@@ -163,7 +163,7 @@ class ScreenDetailState extends State<ScreenDetail> {
                       ),
                     ).then((value) {
                       if (value == true) {
-                        Navigator.of(context).pop();
+                        Navigator.of(context).pop(true);
                       }
                     });
                   },
