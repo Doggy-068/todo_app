@@ -9,53 +9,83 @@ import 'package:provider/provider.dart';
 import 'package:todo_app/database/index.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ScreenHome extends StatelessWidget {
+class ScreenHome extends StatefulWidget {
   const ScreenHome({super.key});
 
   @override
+  State<ScreenHome> createState() => ScreenHomeState();
+}
+
+class ScreenHomeState extends State<ScreenHome> {
+  List<ModelTodo> _list = [];
+
+  void fetchList() {
+    (Provider.of<AppDatabase>(context, listen: false).todos.select()
+          ..orderBy([(t) => d.OrderingTerm(expression: t.startTime)]))
+        .map(
+          (p0) => ModelTodo(
+              id: p0.id,
+              type: p0.type,
+              startTime: p0.startTime,
+              title: p0.title,
+              content: p0.content),
+        )
+        .get()
+        .then((value) {
+      setState(() {
+        _list = value;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    fetchList();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: (Provider.of<AppDatabase>(context).todos.select()
-            ..orderBy([(t) => d.OrderingTerm(expression: t.startTime)]))
-          .map(
-            (p0) => ModelTodo(
-                id: p0.id,
-                type: p0.type,
-                startTime: p0.startTime,
-                title: p0.title,
-                content: p0.content),
-          )
-          .get(),
-      builder: (context, snapshot) {
-        List<ModelTodo> list = List.empty();
-        if (snapshot.hasData && snapshot.data != null) {
-          list = snapshot.data!;
-        }
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text('TODO_APP'),
-          ),
-          body: Container(
-            padding: const EdgeInsets.all(8.0),
-            child: ListView(
-              children: list.map((e) => TodoItemCard(todo: e)).toList(),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('TODO_APP'),
+      ),
+      body: Container(
+        padding: const EdgeInsets.all(8.0),
+        child: ListView(
+          children: _list
+              .map((e) => GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => ScreenDetail(id: e.id),
+                        ),
+                      );
+                    },
+                    child: TodoItemCard(todo: e),
+                  ))
+              .toList(),
+        ),
+      ),
+      bottomNavigationBar: const ComBottomNavigationBar(
+        currentIndex: 0,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context)
+              .push(
+            MaterialPageRoute(
+              builder: (context) => const ScreenEdit(),
             ),
-          ),
-          bottomNavigationBar: const ComBottomNavigationBar(
-            currentIndex: 0,
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const ScreenEdit(),
-                ),
-              );
-            },
-            child: const Icon(Icons.add),
-          ),
-        );
-      },
+          )
+              .then((value) {
+            if (value == true) {
+              fetchList();
+            }
+          });
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
@@ -71,80 +101,71 @@ class TodoItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => ScreenDetail(id: _todo.id),
-          ),
-        );
-      },
-      child: Badge(
-        isLabelVisible: _todo.isOutDate,
-        label: Text(AppLocalizations.of(context)!.home_outdated),
-        offset: const Offset(-55, 15),
-        child: Card(
-          color: _todo.isOutDate ? Colors.grey[200] : null,
-          child: Container(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Icon(
-                      Icons.circle,
-                      color: _todo.type.value,
-                      size: _size,
-                    ),
-                    Expanded(
-                      child: Container(
-                        margin: const EdgeInsets.only(
-                          left: 4.0,
-                        ),
-                        child: Text(
-                          _dateFormat.format(_todo.startTime),
-                          style: const TextStyle(
-                            fontSize: _size,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                        ),
+    return Badge(
+      isLabelVisible: _todo.isOutDate,
+      label: Text(AppLocalizations.of(context)!.home_outdated),
+      offset: const Offset(-55, 15),
+      child: Card(
+        color: _todo.isOutDate ? Colors.grey[200] : null,
+        child: Container(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(
+                    Icons.circle,
+                    color: _todo.type.value,
+                    size: _size,
+                  ),
+                  Expanded(
+                    child: Container(
+                      margin: const EdgeInsets.only(
+                        left: 4.0,
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
                       child: Text(
-                        _todo.title,
+                        _dateFormat.format(_todo.startTime),
                         style: const TextStyle(
                           fontSize: _size,
-                          fontWeight: FontWeight.bold,
-                          overflow: TextOverflow.ellipsis,
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text.rich(
-                        TextSpan(
-                          text: _todo.content,
-                          style: const TextStyle(
-                            fontSize: _size,
-                          ),
-                        ),
-                        maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                  ],
-                ),
-              ],
-            ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      _todo.title,
+                      style: const TextStyle(
+                        fontSize: _size,
+                        fontWeight: FontWeight.bold,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text.rich(
+                      TextSpan(
+                        text: _todo.content,
+                        style: const TextStyle(
+                          fontSize: _size,
+                        ),
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),

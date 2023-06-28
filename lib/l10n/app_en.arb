@@ -16,7 +16,9 @@
   "edit_edit": "Edit",
   "edit_type": "Type: ",
   "edit_title": "Title: ",
+  "edit_title_msg": "Please input title!",
   "edit_content": "Content: ",
+  "edit_content_msg": "Please input content!",
   "edit_save": "Save",
   "edit_cancel": "Cancel"
 }

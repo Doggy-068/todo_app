@@ -33,6 +33,7 @@ class ScreenEditState extends State<ScreenEdit> {
     });
   }
 
+  final _formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
   final contentController = TextEditingController();
 
@@ -68,6 +69,7 @@ class ScreenEditState extends State<ScreenEdit> {
       body: Container(
         padding: const EdgeInsets.all(16.0),
         child: Form(
+          key: _formKey,
           child: Column(
             children: [
               FormField(
@@ -98,6 +100,12 @@ class ScreenEditState extends State<ScreenEdit> {
                 ),
               ),
               TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return AppLocalizations.of(context)!.edit_title_msg;
+                  }
+                  return null;
+                },
                 controller: titleController,
                 decoration: InputDecoration(
                   label: Text(AppLocalizations.of(context)!.edit_title),
@@ -135,6 +143,12 @@ class ScreenEditState extends State<ScreenEdit> {
               ),
               Expanded(
                 child: TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return AppLocalizations.of(context)!.edit_content_msg;
+                    }
+                    return null;
+                  },
                   controller: contentController,
                   decoration: InputDecoration(
                     labelText: AppLocalizations.of(context)!.edit_content,
@@ -153,30 +167,34 @@ class ScreenEditState extends State<ScreenEdit> {
                   children: [
                     TextButton(
                       onPressed: () {
-                        if (widget.id != null) {
-                          int id = widget.id as int;
-                          Provider.of<AppDatabase>(context, listen: false)
-                              .todos
-                              .insertOnConflictUpdate(TodosCompanion.insert(
-                                id: d.Value(id),
-                                type: _type,
-                                startTime: _startTime,
-                                title: titleController.text,
-                                content: contentController.text,
-                              ))
-                              .then((value) => Navigator.of(context).pop());
-                        } else {
-                          Provider.of<AppDatabase>(context, listen: false)
-                              .todos
-                              .insertOne(
-                                TodosCompanion.insert(
+                        if (_formKey.currentState!.validate()) {
+                          if (widget.id != null) {
+                            int id = widget.id as int;
+                            Provider.of<AppDatabase>(context, listen: false)
+                                .todos
+                                .insertOnConflictUpdate(TodosCompanion.insert(
+                                  id: d.Value(id),
                                   type: _type,
                                   startTime: _startTime,
                                   title: titleController.text,
                                   content: contentController.text,
-                                ),
-                              )
-                              .then((value) => Navigator.of(context).pop());
+                                ))
+                                .then(
+                                    (value) => Navigator.of(context).pop(true));
+                          } else {
+                            Provider.of<AppDatabase>(context, listen: false)
+                                .todos
+                                .insertOne(
+                                  TodosCompanion.insert(
+                                    type: _type,
+                                    startTime: _startTime,
+                                    title: titleController.text,
+                                    content: contentController.text,
+                                  ),
+                                )
+                                .then(
+                                    (value) => Navigator.of(context).pop(true));
+                          }
                         }
                       },
                       child: Text(AppLocalizations.of(context)!.edit_save),

@@ -16,7 +16,9 @@
   "edit_edit": "编辑",
   "edit_type": "类型：",
   "edit_title": "标题：",
+  "edit_title_msg": "请输入标题！",
   "edit_content": "内容：",
+  "edit_content_msg": "请输入内容！",
   "edit_save": "保存",
   "edit_cancel": "取消"
 }
