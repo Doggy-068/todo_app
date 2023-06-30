@@ -63,9 +63,7 @@ class ScreenHomeState extends State<ScreenHome> {
                         ),
                       )
                           .then((value) {
-                        if (value == true) {
-                          fetchList();
-                        }
+                        fetchList();
                       });
                     },
                     child: TodoItemCard(todo: e),
