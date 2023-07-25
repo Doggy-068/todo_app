@@ -128,7 +128,7 @@ class ScreenSetting extends StatelessWidget {
                 ),
               ),
               bottomNavigationBar: const ComBottomNavigationBar(
-                currentIndex: 1,
+                currentIndex: 2,
               ),
             );
           }

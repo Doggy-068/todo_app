@@ -1,5 +1,6 @@
 {
   "component_com_bottom_navigation_bar_home": "Home",
+  "component_com_bottom_navigation_bar_daily": "Daily",
   "component_com_bottom_navigation_bar_setting": "Setting",
   "home_outdated": "Outdated!",
   "setting_setting": "Setting",
@@ -20,5 +21,15 @@
   "edit_content": "Content: ",
   "edit_content_msg": "Please input content!",
   "edit_save": "Save",
-  "edit_cancel": "Cancel"
+  "edit_cancel": "Cancel",
+  "daily_title": "Daily",
+  "daily_ask": "Are you sure to delete it?",
+  "daily_cancel": "Cancel",
+  "daily_confirm": "Confirm",
+  "daily_form_group_tip": "Please enter Group Name!",
+  "daily_form_group_title": "Group Name: ",
+  "daily_form_item_tip": "Please enter Name!",
+  "daily_form_item_title": "Name: ",
+  "daily_form_cancel": "Cancel",
+  "daily_form_save": "Save"
 }

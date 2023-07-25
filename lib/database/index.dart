@@ -19,7 +19,29 @@ class Todos extends Table {
   Set<Column> get primaryKey => {id};
 }
 
-@DriftDatabase(tables: [Todos])
+class DailyGroups extends Table {
+  IntColumn get id => integer()();
+
+  TextColumn get name => text()();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+class Dailies extends Table {
+  IntColumn get id => integer()();
+
+  TextColumn get name => text()();
+
+  BoolColumn get isCompleted => boolean()();
+
+  IntColumn get group => integer().references(DailyGroups, #id)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
+@DriftDatabase(tables: [Todos, DailyGroups, Dailies])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(openConnection());
 

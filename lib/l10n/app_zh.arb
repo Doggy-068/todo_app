@@ -1,5 +1,6 @@
 {
   "component_com_bottom_navigation_bar_home": "主页",
+  "component_com_bottom_navigation_bar_daily": "日程",
   "component_com_bottom_navigation_bar_setting": "设置",
   "home_outdated": "已过期！",
   "setting_setting": "设置",
@@ -20,5 +21,15 @@
   "edit_content": "内容：",
   "edit_content_msg": "请输入内容！",
   "edit_save": "保存",
-  "edit_cancel": "取消"
+  "edit_cancel": "取消",
+  "daily_title": "日程",
+  "daily_ask": "确认删除？",
+  "daily_cancel": "取消",
+  "daily_confirm": "确认",
+  "daily_form_group_tip": "请输入组名！",
+  "daily_form_group_title": "组名：",
+  "daily_form_item_tip": "请输入名称！",
+  "daily_form_item_title": "名称：",
+  "daily_form_cancel": "取消",
+  "daily_form_save": "保存"
 }
