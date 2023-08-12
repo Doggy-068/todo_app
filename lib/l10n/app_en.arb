@@ -1,8 +1,11 @@
 {
   "component_com_bottom_navigation_bar_home": "Home",
-  "component_com_bottom_navigation_bar_daily": "Daily",
+  "component_com_bottom_navigation_bar_navigation": "Navigation",
   "component_com_bottom_navigation_bar_setting": "Setting",
   "home_outdated": "Outdated!",
+  "navigation_title": "Navigation",
+  "navigation_daily": "Daily",
+  "navigation_chart": "Chart",
   "setting_setting": "Setting",
   "setting_language": "App Language",
   "setting_language_tooltip": "All languages",
@@ -31,5 +34,6 @@
   "daily_form_item_tip": "Please enter Name!",
   "daily_form_item_title": "Name: ",
   "daily_form_cancel": "Cancel",
-  "daily_form_save": "Save"
+  "daily_form_save": "Save",
+  "chart_title": "Chart"
 }

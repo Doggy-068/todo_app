@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/screen/daily/index.dart';
 import 'package:todo_app/screen/home/index.dart';
+import 'package:todo_app/screen/navigation/index.dart';
 import 'package:todo_app/screen/setting/index.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -20,7 +20,7 @@ class ComBottomNavigationBar extends StatelessWidget {
           ));
         } else if (value == 1) {
           Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (context) => const ScreenDaily(),
+            builder: (context) => const ScreenNavigation(),
           ));
         } else {
           Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -35,9 +35,9 @@ class ComBottomNavigationBar extends StatelessWidget {
               .component_com_bottom_navigation_bar_home,
         ),
         BottomNavigationBarItem(
-          icon: const Icon(Icons.schedule),
+          icon: const Icon(Icons.navigation),
           label: AppLocalizations.of(context)!
-              .component_com_bottom_navigation_bar_daily,
+              .component_com_bottom_navigation_bar_navigation,
         ),
         BottomNavigationBarItem(
           icon: const Icon(Icons.settings),

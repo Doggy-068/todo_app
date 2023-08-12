@@ -1,8 +1,11 @@
 {
   "component_com_bottom_navigation_bar_home": "主页",
-  "component_com_bottom_navigation_bar_daily": "日程",
+  "component_com_bottom_navigation_bar_navigation": "导航",
   "component_com_bottom_navigation_bar_setting": "设置",
   "home_outdated": "已过期！",
+  "navigation_title": "导航",
+  "navigation_daily": "日程",
+  "navigation_chart": "图表",
   "setting_setting": "设置",
   "setting_language": "应用语言",
   "setting_language_tooltip": "可选语言",
@@ -31,5 +34,6 @@
   "daily_form_item_tip": "请输入名称！",
   "daily_form_item_title": "名称：",
   "daily_form_cancel": "取消",
-  "daily_form_save": "保存"
+  "daily_form_save": "保存",
+  "chart_title": "图表"
 }
