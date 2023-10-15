@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import './message.dart';
+import './document.dart';
+import './workbench.dart';
 
 class ScreenAddress extends StatelessWidget {
   const ScreenAddress({super.key});
@@ -171,7 +173,21 @@ class ScreenAddress extends StatelessWidget {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => const ScreenMessage(),
+                builder: (context) => ScreenMessage(),
+              ),
+            );
+          } else if (i == 2) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ScreenDocument(),
+              ),
+            );
+          } else if (i == 3) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ScreenWorkbench(),
               ),
             );
           }
