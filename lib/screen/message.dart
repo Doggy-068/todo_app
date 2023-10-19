@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import './address.dart';
 import './document.dart';
 import './workbench.dart';
+import './chat.dart';
 
 class ScreenMessage extends StatelessWidget {
   ScreenMessage({super.key});
@@ -235,6 +236,14 @@ class ScreenMessage extends StatelessWidget {
               children: List.filled(30, 1)
                   .map(
                     (e) => ListTile(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ScreenChat(),
+                          ),
+                        );
+                      },
                       contentPadding: const EdgeInsets.only(
                         left: 10,
                         right: 10,
