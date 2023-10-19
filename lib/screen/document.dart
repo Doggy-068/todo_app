@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import './message.dart';
-import './address.dart';
-import './workbench.dart';
+import '../component/navigation.dart';
 
 class ScreenDocument extends StatelessWidget {
   const ScreenDocument({super.key});
@@ -123,52 +121,8 @@ class ScreenDocument extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.black54,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.message_outlined),
-            label: '消息',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.contact_page_outlined),
-            label: '通讯录',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.file_copy_outlined),
-            label: '云文档',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.work_outline),
-            label: '工作台',
-          ),
-        ],
+      bottomNavigationBar: const Navigation(
         currentIndex: 2,
-        onTap: (i) {
-          if (i == 0) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ScreenMessage(),
-              ),
-            );
-          } else if (i == 1) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const ScreenAddress(),
-              ),
-            );
-          } else if (i == 3) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const ScreenWorkbench(),
-              ),
-            );
-          }
-        },
       ),
     );
   }
